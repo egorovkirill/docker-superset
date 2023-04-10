@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  superset:
+    image: apache/superset:latest
+    container_name: superset
+    restart: on-failure
+    ports:
+      - "8088:8088"
+    entrypoint: ["/app/docker-entrypoint.sh"]
+    
+    environment:
+      - SUPERSET_ENV=production
+      - SUPERSET_LOAD_EXAMPLES=no
+      - SECRET_KEY=uxdEHmynxSom7ZajaAUJU+Vz6r2s7aZNcy+jX6PBo1UZaPSE9O0gpGQ+
+    volumes:
+      - ./superset_config.py:/app/pythonpath/superset_config.py
+      - ./entrypoint_superset.sh:/app/docker-entrypoint.sh
+
+
